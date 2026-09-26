@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        StichKart — Digital Tailoring Marketplace
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+
+            --black: #090909;
+            --dark: #111112;
+            --card: #181818;
+
+            --gold: #d8b56a;
+            --gold-light: #f1d99c;
+
+            --cream: #f7f3eb;
+
+            --white: #fff;
+
+            --muted: #a6a39c;
+
+            --border: rgba(255, 255, 255, .1);
+
+        }
+
+        body {
+
+            font-family: "DM Sans", sans-serif;
+
+            background: var(--black);
+
+            color: white;
+
+            overflow-x: hidden;
+
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+
+        }
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+        .header {
+
+            height: 76px;
+
+            padding: 0 6%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            background: rgba(9, 9, 9, .9);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+        .logo {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+        }
+
+        .logo span {
+
+            color: var(--gold);
+
+        }
+
+        .nav {
+
+            display: flex;
+
+            gap: 28px;
+
+        }
+
+        .nav button {
+
+            background: none;
+
+            border: 0;
+
+            color: #aaa;
+
+        }
+
+        .nav button:hover {
+
+            color: var(--gold-light);
+
+        }
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+        .btn {
+
+            padding: 12px 19px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            border: 1px solid transparent;
+
+        }
+
+        .btn-gold {
+
+            background:
+                linear-gradient(135deg,
+                    #c6a057,
+                    #f1d99c);
+
+            color: #111;
+
+        }
+
+        .btn-outline {
+
+            background: transparent;
+
+            color: white;
+
+            border-color: var(--border);
+
+        }
+
+        .hero {
+
+            min-height: 680px;
+
+            padding: 100px 7%;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            align-items: center;
+
+            gap: 60px;
+
+            background:
+
+                radial-gradient(circle at 75% 40%,
+                    rgba(216, 181, 106, .14),
+                    transparent 35%);
+
+        }
+
+        .eyebrow {
+
+            color: var(--gold);
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 18px;
+
+        }
+
+        .hero h1 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(52px, 7vw, 88px);
+
+            line-height: .98;
+
+            margin-bottom: 28px;
+
+        }
+
+        .hero h1 em {
+
+            color: var(--gold);
+
+            font-style: normal;
+
+        }
+
+        .hero p {
+
+            max-width: 610px;
+
+            color: #aaa;
+
+            line-height: 1.8;
+
+        }
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 32px;
+
+        }
+
+        .hero-art {
+
+            height: 510px;
+
+            border-radius: 30px;
+
+            border: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+
+                radial-gradient(circle,
+                    rgba(216, 181, 106, .22),
+                    transparent 45%),
+
+                linear-gradient(145deg,
+                    #252118,
+                    #111);
+
+        }
+
+        .hero-art-content {
+
+            text-align: center;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 64px;
+
+            color: var(--gold-light);
+
+        }
+
+        .hero-art-content small {
+
+            display: block;
+
+            font-family: "DM Sans";
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            color: #999;
+
+            margin-top: 15px;
+
+        }
+
+        .section {
+
+            padding: 100px 7%;
+
+        }
+
+        .light {
+
+            background: var(--cream);
+
+            color: #151515;
+
+        }
+
+        .section-head {
+
+            margin-bottom: 45px;
+
+        }
+
+        .section-head h2 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 48px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .section-head p {
+
+            color: #888;
+
+        }
+
+        .gender-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+        .gender-card {
+
+            min-height: 260px;
+
+            background: white;
+
+            border: 1px solid #e0dbd0;
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            text-align: left;
+
+            transition: .25s;
+
+        }
+
+        .gender-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #b99654;
+
+        }
+
+        .gender-card small {
+
+            color: #b18d4d;
+
+            letter-spacing: 2px;
+
+        }
+
+        .gender-card h3 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 38px;
+
+            margin-top: 75px;
+
+        }
+
+        .gender-card p {
+
+            color: #777;
+
+            margin-top: 8px;
+
+        }
+
+        .category-area {
+
+            display: none;
+
+            margin-top: 45px;
+
+        }
+
+        .category-area.active {
+
+            display: block;
+
+        }
+
+        .category-head {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+        }
+
+        .category-head h3 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 32px;
+
+        }
+
+        .back {
+
+            border: 1px solid #ddd5c7;
+
+            background: white;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+        }
+
+        .category-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 14px;
+
+        }
+
+        .category-card {
+
+            padding: 20px;
+
+            background: white;
+
+            border: 1px solid #e1dbd1;
+
+            border-radius: 13px;
+
+            text-align: left;
+
+            min-height: 105px;
+
+        }
+
+        .category-card:hover {
+
+            border-color: #b99654;
+
+        }
+
+        .category-card strong {
+
+            display: block;
+
+            font-size: 15px;
+
+        }
+
+        .category-card small {
+
+            display: block;
+
+            color: #999;
+
+            margin-top: 8px;
+
+        }
+
+        .info {
+
+            margin-top: 28px;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            background: #fff7e5;
+
+            border: 1px solid #ead5a4;
+
+            color: #6d5528;
+
+            line-height: 1.65;
+
+        }
+
+        .workflow {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+
+        }
+
+        .workflow-card {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+        }
+
+        .workflow-card span {
+
+            color: var(--gold);
+
+            letter-spacing: 2px;
+
+        }
+
+        .workflow-card h3 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 25px;
+
+            margin: 18px 0 10px;
+
+        }
+
+        .workflow-card p {
+
+            color: #999;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+
+        }
+
+        .cta {
+
+            text-align: center;
+
+            padding: 100px 7%;
+
+            background:
+
+                radial-gradient(circle,
+                    rgba(216, 181, 106, .13),
+                    transparent 45%);
+
+        }
+
+        .cta h2 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 52px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .cta p {
+
+            color: #999;
+
+            margin-bottom: 30px;
+
+        }
+
+        footer {
+
+            padding: 30px 7%;
+
+            border-top: 1px solid var(--border);
+
+            color: #777;
+
+            display: flex;
+
+            justify-content: space-between;
+
+        }
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            background: rgba(0, 0, 0, .8);
+
+            backdrop-filter: blur(10px);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+        .modal.active {
+
+            display: flex;
+
+        }
+
+        .modal-box {
+
+            width: min(650px, 100%);
+
+            max-height: 92vh;
+
+            overflow: auto;
+
+            background: #171717;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+        }
+
+        .modal-head {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+        }
+
+        .modal-head h2 {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 31px;
+
+        }
+
+        .close {
+
+            border: 0;
+
+            background: none;
+
+            color: white;
+
+            font-size: 28px;
+
+        }
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+        .field {
+
+            margin-bottom: 16px;
+
+        }
+
+        .field.full {
+
+            grid-column: 1/-1;
+
+        }
+
+        .field label {
+
+            display: block;
+
+            color: #aaa;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            border: 1px solid var(--border);
+
+            background: #0e0e0f;
+
+            color: white;
+
+            outline: none;
+
+        }
+
+        .field textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+        /* ================================================
+   NEW DESIGN REFERENCE BOX
+================================================ */
+
+        .design-reference {
+
+            margin: 20px 0;
+
+            padding: 22px;
+
+            border-radius: 15px;
+
+            border: 1px solid rgba(216, 181, 106, .35);
+
+            background:
+
+                linear-gradient(145deg,
+                    rgba(216, 181, 106, .1),
+                    rgba(216, 181, 106, .03));
+
+        }
+
+        .design-reference-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--gold-light);
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+        .design-reference-description {
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+
+            margin-bottom: 18px;
+
+        }
+
+        .reference-option {
+
+            padding: 16px;
+
+            border-radius: 11px;
+
+            background: #0d0d0e;
+
+            border: 1px solid var(--border);
+
+            margin-bottom: 12px;
+
+        }
+
+        .reference-option label {
+
+            display: block;
+
+            color: #ddd;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+        }
+
+        .reference-option input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            background: #161617;
+
+            border: 1px solid #29292a;
+
+            border-radius: 8px;
+
+            color: white;
+
+        }
+
+        .reference-hint {
+
+            font-size: 11px;
+
+            color: #777;
+
+            margin-top: 7px;
+
+        }
+
+        .upload-status {
+
+            margin-top: 8px;
+
+            color: var(--gold);
+
+            font-size: 12px;
+
+        }
+
+        .success {
+
+            text-align: center;
+
+            padding: 30px 10px;
+
+        }
+
+        .success-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(216, 181, 106, .15);
+
+            color: var(--gold);
+
+            font-size: 35px;
+
+        }
+
+        .success h2 {
+
+            font-family: "Playfair Display", serif;
+
+            margin: 20px 0 8px;
+
+        }
+
+        .order-number {
+
+            color: var(--gold);
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+        }
+
+        @media(max-width:1000px) {
+
+            .hero {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .gender-grid,
+            .workflow {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .category-grid {
+
+                grid-template-columns: repeat(3, 1fr);
+
+            }
+
+        }
+
+        @media(max-width:700px) {
+
+            .nav {
+
+                display: none;
+
+            }
+
+            .header {
+
+                padding: 0 18px;
+
+            }
+
+            .header-actions .btn-outline {
+
+                display: none;
+
+            }
+
+            .hero {
+
+                padding: 70px 20px;
+
+            }
+
+            .section {
+
+                padding: 70px 20px;
+
+            }
+
+            .hero-art {
+
+                height: 350px;
+
+            }
+
+            .gender-grid,
+            .workflow {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .category-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .field.full {
+
+                grid-column: auto;
+
+            }
+
+            footer {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <div class="logo">
+            Stich<span>Kart</span>
+        </div>
+
+        <nav class="nav">
+
+            <button onclick="scrollToSection('collections')">
+                Collections
+            </button>
+
+            <button onclick="scrollToSection('how')">
+                How It Works
+            </button>
+
+            <button onclick="scrollToSection('services')">
+                Services
+            </button>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <button class="btn btn-outline" onclick="openLogin()">
+                Login
+            </button>
+
+            <button class="btn btn-gold" onclick="openOrder()">
+                Get Started
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+     HERO
+===================================================== -->
+
+    <section class="hero">
+
+        <div>
+
+            <div class="eyebrow">
+                India's Digital Tailoring Marketplace
+            </div>
+
+            <h1>
+                Your Design.<br>
+                Your Fit.<br>
+                <em>Your Tailor.</em>
+            </h1>
+
+            <p>
+                Saw a beautiful outfit in an Instagram Reel, YouTube video
+                or somewhere online? Send the design reference to your tailor
+                through StichKart and get your own garment stitched from it.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn btn-gold" onclick="openOrder()">
+                    Stitch This Design →
+                </button>
+
+                <button class="btn btn-outline" onclick="scrollToSection('how')">
+                    How It Works
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-art">
+
+            <div class="hero-art-content">
+
+                DESIGN<br>
+                → STITCH
+
+                <small>
+                    FROM INSPIRATION TO GARMENT
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     COLLECTIONS
+===================================================== -->
+
+    <section class="section light" id="collections">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                Collections
+            </div>
+
+            <h2>
+                What do you want stitched?
+            </h2>
+
+            <p>
+                Choose the wearer and select a garment that a tailor can
+                actually stitch.
+            </p>
+
+        </div>
+
+
+        <div class="gender-grid">
+
+            <button class="gender-card" onclick="showCategories('men')">
+
+                <small>
+                    01 — COLLECTION
+                </small>
+
+                <h3>
+                    Men
+                </h3>
+
+                <p>
+                    Shirts, trousers, kurtas, suits, sherwanis and more.
+                </p>
+
+            </button>
+
+
+            <button class="gender-card" onclick="showCategories('women')">
+
+                <small>
+                    02 — COLLECTION
+                </small>
+
+                <h3>
+                    Women
+                </h3>
+
+                <p>
+                    Blouses, kurtis, suits, lehengas, gowns and more.
+                </p>
+
+            </button>
+
+
+            <button class="gender-card" onclick="showCategories('kids')">
+
+                <small>
+                    03 — COLLECTION
+                </small>
+
+                <h3>
+                    Kids
+                </h3>
+
+                <p>
+                    Dresses, shirts, ethnic wear, suits and more.
+                </p>
+
+            </button>
+
+        </div>
+
+
+        <div class="category-area" id="categoryArea">
+
+            <div class="category-head">
+
+                <h3 id="categoryTitle">
+                    Collection
+                </h3>
+
+                <button class="back" onclick="hideCategories()">
+                    ← Back
+                </button>
+
+            </div>
+
+            <div class="category-grid" id="categoryGrid"></div>
+
+        </div>
+
+
+        <div class="info">
+
+            <strong>
+                StichKart's Two-Reference System
+            </strong>
+
+            <br><br>
+
+            <strong>1. Design Reference:</strong>
+            अगर आपको Instagram Reel, YouTube, Pinterest या किसी website
+            पर कोई design पसंद आया है, तो उसका URL या design file attach करें।
+            Tailor उसे देखकर design बनाएगा।
+
+            <br><br>
+
+            <strong>2. Physical Fit Reference:</strong>
+            अगर आपके पास कोई पुराना garment है जो आपको perfectly fit आता है,
+            तो वह garment tailor को physically दिया जा सकता है ताकि वही fitting
+            और proportions reproduce किए जा सकें।
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     SERVICES
+===================================================== -->
+
+    <section class="section" id="services">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                Tailoring Services
+            </div>
+
+            <h2>
+                Alteration & Repair
+            </h2>
+
+            <p>
+                Common tailoring and alteration services available through
+                StichKart.
+            </p>
+
+        </div>
+
+        <div class="category-grid" id="serviceGrid"></div>
+
+    </section>
+
+
+    <!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+    <section class="section" id="how">
+
+        <div class="section-head">
+
+            <div class="eyebrow">
+                How It Works
+            </div>
+
+            <h2>
+                From Reel<br>
+                To Real Garment.
+            </h2>
+
+        </div>
+
+
+        <div class="workflow">
+
+            <div class="workflow-card">
+
+                <span>01</span>
+
+                <h3>
+                    Find a Design
+                </h3>
+
+                <p>
+                    See a dress, shirt, blouse, lehenga or any other
+                    stitchable design you like on Instagram, YouTube,
+                    Pinterest or another website.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-card">
+
+                <span>02</span>
+
+                <h3>
+                    Share the Reference
+                </h3>
+
+                <p>
+                    Paste the Reel/video/page URL or attach an image/PDF
+                    reference file directly with your stitching request.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-card">
+
+                <span>03</span>
+
+                <h3>
+                    Give Your Instructions
+                </h3>
+
+                <p>
+                    Tell the tailor what you want changed — colour, fabric,
+                    sleeves, neckline, length, fitting or any other detail.
+                </p>
+
+            </div>
+
+
+            <div class="workflow-card">
+
+                <span>04</span>
+
+                <h3>
+                    Tailor Creates It
+                </h3>
+
+                <p>
+                    The tailor opens your design reference, understands the
+                    design and stitches your garment according to your request.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     CTA
+===================================================== -->
+
+    <section class="cta">
+
+        <h2>
+            Saw a Design You Love?
+        </h2>
+
+        <p>
+            Don't search for the exact same ready-made product.
+            Send the design to your tailor.
+        </p>
+
+        <button class="btn btn-gold" onclick="openOrder()">
+            Stitch This Design →
+        </button>
+
+    </section>
+
+
+    <footer>
+
+        <div>
+            © 2026 StichKart
+        </div>
+
+        <div>
+            India's Digital Tailoring Marketplace
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+     ORDER MODAL
+===================================================== -->
+
+    <div class="modal" id="orderModal">
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h2>
+                    Stitch This Design
+                </h2>
+
+                <button class="close" onclick="closeModal('orderModal')">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="orderForm">
+
+
+                <div class="form-grid">
+
+
+                    <div class="field">
+
+                        <label>
+                            Your Name
+                        </label>
+
+                        <input id="customerName" required placeholder="Enter your name">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input id="phone" required placeholder="10 digit mobile number">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Collection
+                        </label>
+
+                        <select id="gender" required onchange="loadGarments()">
+
+                            <option value="">
+                                Select collection
+                            </option>
+
+                            <option value="men">
+                                Men
+                            </option>
+
+                            <option value="women">
+                                Women
+                            </option>
+
+                            <option value="kids">
+                                Kids
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Garment
+                        </label>
+
+                        <select id="garment" required>
+
+                            <option value="">
+                                Select collection first
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                 DESIGN REFERENCE
+            ================================================== -->
+
+                <div class="design-reference">
+
+                    <div class="design-reference-title">
+
+                        ✦ Design Reference
+
+                    </div>
+
+
+                    <div class="design-reference-description">
+
+                        कोई Instagram Reel, YouTube video, Pinterest post
+                        या website का design पसंद आया है?
+                        उसका link या reference file यहाँ भेजें।
+                        यही design tailor को दिखाई जाएगी।
+
+                    </div>
+
+
+                    <!-- URL -->
+
+                    <div class="reference-option">
+
+                        <label>
+                            🔗 Design / Reel / Video URL
+                        </label>
+
+                        <input type="url" id="designUrl"
+                            placeholder="https://instagram.com/... or https://youtube.com/...">
+
+                        <div class="reference-hint">
+
+                            Instagram, YouTube, Pinterest या किसी भी
+                            accessible webpage का link paste कर सकते हैं।
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FILE -->
+
+                    <div class="reference-option">
+
+                        <label>
+                            📎 Or Attach Design File
+                        </label>
+
+                        <input type="file" id="designFile" accept="image/*,.pdf" onchange="showFileName()">
+
+                        <div class="upload-status" id="uploadStatus"></div>
+
+                        <div class="reference-hint">
+
+                            Design screenshot, image या PDF attach करें।
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                 PHYSICAL FIT REFERENCE
+            ================================================== -->
+
+                <div class="design-reference">
+
+                    <div class="design-reference-title">
+
+                        👕 Physical Fit Reference
+
+                    </div>
+
+                    <div class="design-reference-description">
+
+                        अगर आपके पास कोई पुराना garment है जो perfectly
+                        fit आता है, तो उसे tailor को physically देने के लिए
+                        साथ रखें। इससे tailor को आपकी desired fitting समझने
+                        में मदद मिलेगी।
+
+                    </div>
+
+                    <label style="
+                    display:flex;
+                    gap:10px;
+                    align-items:center;
+                    color:#ddd;
+                    font-size:13px;
+                    ">
+
+                        <input type="checkbox" id="physicalReference" checked>
+
+                        I will provide my old fitting garment to the tailor.
+
+                    </label>
+
+                </div>
+
+
+                <!-- =================================================
+                 INSTRUCTIONS
+            ================================================== -->
+
+                <div class="field">
+
+                    <label>
+                        Instructions for Tailor
+                    </label>
+
+                    <textarea id="instructions"
+                        placeholder="Example: Same design as the Reel, but black colour, full sleeves, round neck and slim fitting."></textarea>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-gold" style="width:100%;">
+
+                    Send Design to Tailor →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     LOGIN
+===================================================== -->
+
+    <div class="modal" id="loginModal">
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h2>
+                    Welcome to StichKart
+                </h2>
+
+                <button class="close" onclick="closeModal('loginModal')">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input id="loginPhone" placeholder="Enter mobile number">
+
+            </div>
+
+
+            <button class="btn btn-gold" style="width:100%;" onclick="loginUser()">
+
+                Continue
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     SUCCESS
+===================================================== -->
+
+    <div class="modal" id="successModal">
+
+        <div class="modal-box">
+
+            <div class="success">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>
+                    Design Sent Successfully
+                </h2>
+
+                <p style="
+                color:#999;
+                margin:10px 0 20px;
+                ">
+                    Your design reference has been attached
+                    to the stitching request.
+                </p>
+
+                <div class="order-number" id="successOrder">
+                    SK000000
+                </div>
+
+                <p style="
+                color:#999;
+                margin-top:20px;
+                font-size:13px;
+                line-height:1.6;
+                ">
+                    The tailor will be able to open the design reference
+                    and follow your instructions.
+                </p>
+
+                <button class="btn btn-gold" style="margin-top:25px;" onclick="closeModal('successModal')">
+                    Done
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const API = "/api";
+
+        let categoryData = {};
+
+        let selectedGender = "";
+
+
+        /* =====================================================
+           LOAD CATEGORIES
+        ===================================================== */
+
+        async function loadCategories() {
+
+            try {
+
+                const response =
+                    await fetch(API + "/categories");
+
+                const data =
+                    await response.json();
+
+                categoryData =
+                    data.categories;
+
+                renderServices();
+
+            } catch (error) {
+
+                console.error(
+                    "Category loading error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           SHOW CATEGORY
+        ===================================================== */
+
+        function showCategories(type) {
+
+            selectedGender = type;
+
+            const area =
+                document.getElementById(
+                    "categoryArea"
+                );
+
+            const title =
+                document.getElementById(
+                    "categoryTitle"
+                );
+
+            const grid =
+                document.getElementById(
+                    "categoryGrid"
+                );
+
+            const names = {
+
+                men:
+                    "Men's Tailoring",
+
+                women:
+                    "Women's Tailoring",
+
+                kids:
+                    "Kids' Tailoring"
+
+            };
+
+            title.textContent =
+                names[type];
+
+            grid.innerHTML = "";
+
+
+            categoryData[type].forEach(item => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "category-card";
+
+                button.innerHTML = `
+
+            <strong>
+                ${escapeHTML(item)}
+            </strong>
+
+            <small>
+                Custom stitching
+            </small>
+
+        `;
+
+                button.onclick = () =>
+                    openOrder(type, item);
+
+                grid.appendChild(button);
+
+            });
+
+
+            area.classList.add("active");
+
+            area.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        }
+
+
+        /* =====================================================
+           HIDE CATEGORY
+        ===================================================== */
+
+        function hideCategories() {
+
+            document
+                .getElementById("categoryArea")
+                .classList.remove("active");
+
+        }
+
+
+        /* =====================================================
+           SERVICES
+        ===================================================== */
+
+        function renderServices() {
+
+            const grid =
+                document.getElementById(
+                    "serviceGrid"
+                );
+
+            grid.innerHTML = "";
+
+
+            categoryData.services.forEach(item => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "category-card";
+
+                card.innerHTML = `
+
+            <strong>
+                ${escapeHTML(item)}
+            </strong>
+
+            <small>
+                Tailoring service
+            </small>
+
+        `;
+
+                card.onclick =
+                    () => openOrder();
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =====================================================
+           OPEN ORDER
+        ===================================================== */
+
+        function openOrder(
+            gender = "",
+            garment = ""
+        ) {
+
+            document
+                .getElementById("orderModal")
+                .classList.add("active");
+
+
+            if (gender) {
+
+                document
+                    .getElementById("gender")
+                    .value = gender;
+
+                loadGarments();
+
+            }
+
+
+            if (garment) {
+
+                document
+                    .getElementById("garment")
+                    .value = garment;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOAD GARMENTS
+        ===================================================== */
+
+        function loadGarments() {
+
+            const gender =
+                document.getElementById(
+                    "gender"
+                ).value;
+
+            const select =
+                document.getElementById(
+                    "garment"
+                );
+
+            select.innerHTML =
+                '<option value="">Select garment</option>';
+
+
+            if (
+                !gender ||
+                !categoryData[gender]
+            ) {
+
+                return;
+
+            }
+
+
+            categoryData[gender].forEach(item => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value = item;
+
+                option.textContent = item;
+
+                select.appendChild(option);
+
+            });
+
+        }
+
+
+        /* =====================================================
+           SHOW FILE NAME
+        ===================================================== */
+
+        function showFileName() {
+
+            const input =
+                document.getElementById(
+                    "designFile"
+                );
+
+            const status =
+                document.getElementById(
+                    "uploadStatus"
+                );
+
+
+            if (!input.files.length) {
+
+                status.textContent = "";
+
+                return;
+
+            }
+
+
+            const file =
+                input.files[0];
+
+
+            status.textContent =
+                "✓ Attached: " +
+                file.name;
+
+        }
+
+
+        /* =====================================================
+           FILE TO BASE64
+        ===================================================== */
+
+        function fileToBase64(file) {
+
+            return new Promise(
+                (resolve, reject) => {
+
+                    const reader =
+                        new FileReader();
+
+                    reader.onload =
+                        () =>
+                            resolve(
+                                reader.result
+                            );
+
+                    reader.onerror =
+                        reject;
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           CREATE ORDER
+        ===================================================== */
+
+        document
+            .getElementById("orderForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const customerName =
+                        document
+                            .getElementById(
+                                "customerName"
+                            )
+                            .value
+                            .trim();
+
+
+                    const phone =
+                        document
+                            .getElementById(
+                                "phone"
+                            )
+                            .value
+                            .trim();
+
+
+                    const gender =
+                        document
+                            .getElementById(
+                                "gender"
+                            )
+                            .value;
+
+
+                    const garment =
+                        document
+                            .getElementById(
+                                "garment"
+                            )
+                            .value;
+
+
+                    const designUrl =
+                        document
+                            .getElementById(
+                                "designUrl"
+                            )
+                            .value
+                            .trim();
+
+
+                    const instructions =
+                        document
+                            .getElementById(
+                                "instructions"
+                            )
+                            .value
+                            .trim();
+
+
+                    const physicalReference =
+                        document
+                            .getElementById(
+                                "physicalReference"
+                            )
+                            .checked;
+
+
+                    const fileInput =
+                        document
+                            .getElementById(
+                                "designFile"
+                            );
+
+
+                    let designFileData = "";
+
+                    let designFileName = "";
+
+                    let designFileType = "";
+
+
+                    /* ==========================================
+                       VALIDATE REFERENCE
+                    ========================================== */
+
+                    if (
+                        !designUrl &&
+                        !fileInput.files.length
+                    ) {
+
+                        alert(
+                            "Please add a Design URL or attach a Design File."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* ==========================================
+                       READ FILE
+                    ========================================== */
+
+                    if (fileInput.files.length) {
+
+                        const file =
+                            fileInput.files[0];
+
+
+                        /* Prototype safety limit */
+
+                        if (
+                            file.size >
+                            25 * 1024 * 1024
+                        ) {
+
+                            alert(
+                                "Please select a file smaller than 25 MB."
+                            );
+
+                            return;
+
+                        }
+
+
+                        designFileData =
+                            await fileToBase64(file);
+
+                        designFileName =
+                            file.name;
+
+                        designFileType =
+                            file.type;
+
+                    }
+
+
+                    try {
+
+
+                        /* ======================================
+                           CREATE USER
+                        ====================================== */
+
+                        const userResponse =
+                            await fetch(
+                                API + "/users",
+                                {
+
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+
+                                            name:
+                                                customerName,
+
+                                            phone:
+                                                phone,
+
+                                            role:
+                                                "customer"
+
+                                        })
+
+                                }
+                            );
+
+
+                        const userData =
+                            await userResponse.json();
+
+
+                        const userId =
+                            userData.user.id;
+
+
+                        /* ======================================
+                           CREATE ORDER
+                        ====================================== */
+
+                        const orderResponse =
+                            await fetch(
+                                API + "/orders",
+                                {
+
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+
+                                            customerName,
+
+                                            phone,
+
+                                            userId,
+
+                                            gender,
+
+                                            garment,
+
+                                            designUrl,
+
+                                            designFileName,
+
+                                            designFileType,
+
+                                            designFileData,
+
+                                            physicalReferenceGarment:
+                                                physicalReference,
+
+                                            instructions
+
+                                        })
+
+                                }
+                            );
+
+
+                        const orderData =
+                            await orderResponse.json();
+
+
+                        if (
+                            orderData.success
+                        ) {
+
+                            document
+                                .getElementById(
+                                    "orderForm"
+                                )
+                                .reset();
+
+
+                            document
+                                .getElementById(
+                                    "uploadStatus"
+                                )
+                                .textContent = "";
+
+
+                            closeModal(
+                                "orderModal"
+                            );
+
+
+                            document
+                                .getElementById(
+                                    "successOrder"
+                                )
+                                .textContent =
+                                orderData
+                                    .order
+                                    .orderNumber;
+
+
+                            document
+                                .getElementById(
+                                    "successModal"
+                                )
+                                .classList
+                                .add("active");
+
+                        } else {
+
+                            alert(
+                                orderData.message ||
+                                "Order creation failed."
+                            );
+
+                        }
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "Server connection error. Please check that StichKart server is running."
+                        );
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        function openLogin() {
+
+            document
+                .getElementById(
+                    "loginModal"
+                )
+                .classList
+                .add("active");
+
+        }
+
+
+        function loginUser() {
+
+            const phone =
+                document
+                    .getElementById(
+                        "loginPhone"
+                    )
+                    .value
+                    .trim();
+
+
+            if (!phone) {
+
+                alert(
+                    "Please enter your mobile number."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Login system will be connected with OTP authentication."
+            );
+
+        }
+
+
+        /* =====================================================
+           CLOSE MODAL
+        ===================================================== */
+
+        function closeModal(id) {
+
+            document
+                .getElementById(id)
+                .classList
+                .remove("active");
+
+        }
+
+
+        /* =====================================================
+           SCROLL
+        ===================================================== */
+
+        function scrollToSection(id) {
+
+            document
+                .getElementById(id)
+                .scrollIntoView({
+
+                    behavior: "smooth"
+
+                });
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(value) {
+
+            return String(value)
+
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           OUTSIDE CLICK
+        ===================================================== */
+
+        document
+            .querySelectorAll(".modal")
+            .forEach(modal => {
+
+                modal.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            event.target === modal
+                        ) {
+
+                            modal.classList
+                                .remove("active");
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           START
+        ===================================================== */
+
+        loadCategories();
+
+    </script>
+
+</body>
+
+</html>

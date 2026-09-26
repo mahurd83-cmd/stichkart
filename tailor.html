@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StichKart | Tailor Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 76px;
+
+            background: #0d0d0d;
+
+            border-bottom: 1px solid #292929;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 4%;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+        .logo {
+            color: #d4af37;
+
+            font-size: 24px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .tailor-account {
+            text-align: right;
+        }
+
+        .tailor-account-name {
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+        .tailor-account-location {
+            color: #777;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+        .logout {
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            background: #171717;
+
+            border: 1px solid #333;
+
+            color: #aaa;
+
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            border-color: #d4af37;
+
+            color: #d4af37;
+        }
+
+
+        /* ================= LAYOUT ================= */
+
+        .layout {
+            display: grid;
+
+            grid-template-columns: 230px 1fr;
+
+            min-height:
+                calc(100vh - 76px);
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            background: #101010;
+
+            border-right: 1px solid #252525;
+
+            padding: 25px 15px;
+        }
+
+        .sidebar-title {
+            color: #666;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            padding: 0 12px;
+
+            margin-bottom: 12px;
+        }
+
+        .sidebar button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: transparent;
+
+            color: #aaa;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            margin-bottom: 5px;
+
+            font-weight: 700;
+        }
+
+        .sidebar button:hover,
+        .sidebar button.active {
+            background:
+                rgba(212, 175, 55, .1);
+
+            color: #d4af37;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            padding: 35px;
+
+            max-width: 1400px;
+
+            width: 100%;
+        }
+
+        .page-head {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+        .page-head h1 {
+            font-size: 34px;
+
+            margin-bottom: 8px;
+        }
+
+        .page-head h1 span {
+            color: #d4af37;
+        }
+
+        .page-head p {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= TAILOR SELECT ================= */
+
+        .account-selector {
+            min-width: 270px;
+        }
+
+        .account-selector label {
+            display: block;
+
+            color: #666;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 7px;
+        }
+
+        .account-selector select {
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border-radius: 11px;
+
+            background: #151515;
+
+            border: 1px solid #333;
+
+            color: #ddd;
+
+            outline: none;
+        }
+
+        .account-selector select:focus {
+            border-color: #d4af37;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #111;
+
+            border: 1px solid #272727;
+
+            border-radius: 18px;
+
+            padding: 21px;
+        }
+
+        .stat-number {
+            color: #d4af37;
+
+            font-size: 29px;
+
+            font-weight: 900;
+        }
+
+        .stat-label {
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+        }
+
+
+        /* ================= TOOLBAR ================= */
+
+        .toolbar {
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+        .search {
+            flex: 1;
+
+            padding: 13px 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #303030;
+
+            background: #111;
+
+            color: #fff;
+
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #d4af37;
+        }
+
+        .status-filter {
+            padding: 13px 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #303030;
+
+            background: #111;
+
+            color: #ddd;
+
+            outline: none;
+        }
+
+
+        /* ================= ORDERS ================= */
+
+        .orders {
+            display: grid;
+
+            gap: 17px;
+        }
+
+        .order-card {
+            background: #111;
+
+            border: 1px solid #292929;
+
+            border-radius: 20px;
+
+            padding: 22px;
+
+            transition: .2s;
+        }
+
+        .order-card:hover {
+            border-color: #444;
+        }
+
+
+        /* ================= ORDER HEADER ================= */
+
+        .order-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            align-items: flex-start;
+
+            margin-bottom: 20px;
+        }
+
+        .order-number {
+            color: #d4af37;
+
+            font-size: 17px;
+
+            font-weight: 900;
+        }
+
+        .order-date {
+            color: #666;
+
+            font-size: 11px;
+
+            margin-top: 5px;
+        }
+
+        .status {
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            background:
+                rgba(212, 175, 55, .1);
+
+            border: 1px solid rgba(212, 175, 55, .25);
+
+            color: #e7c85b;
+        }
+
+
+        /* ================= CUSTOMER ================= */
+
+        .customer {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 15px;
+
+            background: #171717;
+
+            border-radius: 14px;
+
+            margin-bottom: 17px;
+        }
+
+        .customer-avatar {
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(135deg,
+                    #d4af37,
+                    #8b701e);
+
+            color: #111;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 900;
+        }
+
+        .customer-name {
+            font-size: 15px;
+
+            font-weight: 800;
+        }
+
+        .customer-phone {
+            color: #777;
+
+            font-size: 11px;
+
+            margin-top: 4px;
+        }
+
+
+        /* ================= DETAILS ================= */
+
+        .details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+        }
+
+        .detail {
+            background: #171717;
+
+            border-radius: 12px;
+
+            padding: 13px;
+        }
+
+        .detail-label {
+            color: #666;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            color: #ddd;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+        }
+
+
+        /* ================= REFERENCES ================= */
+
+        .references {
+            border-top: 1px solid #252525;
+
+            padding-top: 17px;
+
+            margin-top: 5px;
+        }
+
+        .references-title {
+            font-size: 12px;
+
+            font-weight: 800;
+
+            margin-bottom: 11px;
+        }
+
+        .reference-buttons {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .ref-btn {
+            padding: 9px 12px;
+
+            border-radius: 9px;
+
+            background: #191919;
+
+            border: 1px solid #343434;
+
+            color: #ccc;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .ref-btn:hover {
+            color: #d4af37;
+
+            border-color: #d4af37;
+        }
+
+
+        /* ================= INSTRUCTIONS ================= */
+
+        .instructions {
+            margin-top: 15px;
+
+            background: #171717;
+
+            border-radius: 12px;
+
+            padding: 14px;
+        }
+
+        .instructions-title {
+            color: #666;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 7px;
+        }
+
+        .instructions-text {
+            color: #ccc;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= FIT REFERENCE ================= */
+
+        .fit-reference {
+            margin-top: 12px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(212, 175, 55, .06);
+
+            border: 1px dashed rgba(212, 175, 55, .3);
+
+            color: #d6bd65;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= ACTIONS ================= */
+
+        .actions {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            margin-top: 18px;
+
+            padding-top: 17px;
+
+            border-top: 1px solid #252525;
+        }
+
+        .action {
+            padding: 11px 15px;
+
+            border-radius: 10px;
+
+            border: 1px solid #333;
+
+            background: #191919;
+
+            color: #ccc;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+            font-size: 12px;
+        }
+
+        .action:hover {
+            border-color: #d4af37;
+
+            color: #d4af37;
+        }
+
+        .action.primary {
+            background: #d4af37;
+
+            color: #111;
+
+            border-color: #d4af37;
+        }
+
+        .action.primary:hover {
+            background: #f0d56b;
+
+            color: #111;
+        }
+
+        .action.danger {
+            color: #ff9999;
+        }
+
+        .action.danger:hover {
+            border-color: #ff6666;
+
+            color: #ff7777;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            padding: 75px 20px;
+
+            text-align: center;
+
+            background: #111;
+
+            border: 1px solid #272727;
+
+            border-radius: 20px;
+        }
+
+        .empty-icon {
+            font-size: 42px;
+
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #777;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= LOADING ================= */
+
+        .loading {
+            text-align: center;
+
+            color: #777;
+
+            padding: 70px;
+        }
+
+
+        /* ================= MODAL ================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, .82);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 100;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-card {
+            width: 100%;
+
+            max-width: 700px;
+
+            max-height: 85vh;
+
+            overflow: auto;
+
+            background: #121212;
+
+            border: 1px solid #333;
+
+            border-radius: 22px;
+
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+        }
+
+        .close {
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            background: #1b1b1b;
+
+            border: 1px solid #333;
+
+            color: #aaa;
+
+            cursor: pointer;
+
+            font-size: 20px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:1000px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .details {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width:650px) {
+
+            header {
+                padding: 0 18px;
+            }
+
+            .tailor-account {
+                display: none;
+            }
+
+            .main {
+                padding: 22px 15px;
+            }
+
+            .page-head {
+                flex-direction: column;
+            }
+
+            .account-selector {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-direction: column;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            STICHKART
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="tailor-account">
+
+                <div class="tailor-account-name" id="headerTailorName">
+                    Tailor
+                </div>
+
+                <div class="tailor-account-location" id="headerTailorLocation">
+                    —
+                </div>
+
+            </div>
+
+
+            <button class="logout" onclick="tailorLogout()">
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Dashboard
+            </div>
+
+
+            <button class="active" onclick="setFilter('All',this)">
+                📋 All Orders
+            </button>
+
+
+            <button onclick="setFilter('Reference Pending',this)">
+                🆕 New Orders
+            </button>
+
+
+            <button onclick="setFilter('Accepted',this)">
+                ✓ Accepted
+            </button>
+
+
+            <button onclick="setFilter('In Progress',this)">
+                ✂️ Stitching
+            </button>
+
+
+            <button onclick="setFilter('Ready',this)">
+                📦 Ready
+            </button>
+
+
+            <button onclick="setFilter('Completed',this)">
+                ✓ Completed
+            </button>
+
+        </aside>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main">
+
+
+            <div class="page-head">
+
+                <div>
+
+                    <h1>
+                        Tailor <span>Dashboard</span>
+                    </h1>
+
+                    <p>
+                        Manage your assigned custom stitching orders.
+                    </p>
+
+                </div>
+
+
+                <!-- DEMO TAILOR ACCOUNT -->
+
+                <div class="account-selector">
+
+                    <label>
+                        Tailor Account
+                    </label>
+
+                    <select id="tailorSelect" onchange="changeTailorAccount()">
+
+                        <option value="">
+                            Loading tailors...
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= STATS ================= -->
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <div class="stat-number" id="totalCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Total Orders
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number" id="newCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        New Requests
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number" id="stitchingCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        In Progress
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number" id="completedCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Completed
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SEARCH ================= -->
+
+            <div class="toolbar">
+
+                <input class="search" id="search" type="text" placeholder="Search customer, order number or garment..."
+                    oninput="renderOrders()">
+
+
+                <select class="status-filter" id="statusFilter" onchange="renderOrders()">
+
+                    <option value="All">
+                        All Status
+                    </option>
+
+                    <option value="Reference Pending">
+                        New
+                    </option>
+
+                    <option value="Accepted">
+                        Accepted
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Ready">
+                        Ready
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ================= ORDER LIST ================= -->
+
+            <div id="ordersContainer" class="orders">
+
+                <div class="loading">
+                    Loading assigned orders...
+                </div>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- ================= DETAILS MODAL ================= -->
+
+    <div class="modal" id="detailsModal">
+
+        <div class="modal-card">
+
+            <div class="modal-header">
+
+                <h2>
+                    Order Details
+                </h2>
+
+                <button class="close" onclick="closeDetails()">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div id="detailsContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        let tailors = [];
+
+        let currentTailor = null;
+
+        let allOrders = [];
+
+        let currentFilter = "All";
+
+
+        /* =====================================================
+           LOAD TAILORS
+        ===================================================== */
+
+        async function loadTailors() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/tailors"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Tailors load nahi hue."
+                    );
+
+                }
+
+
+                tailors =
+                    data.tailors || [];
+
+
+                const select =
+                    document.getElementById(
+                        "tailorSelect"
+                    );
+
+
+                select.innerHTML =
+                    tailors.map(
+                        tailor => `
+
+                    <option
+                        value="${escapeHTML(tailor.id)}"
+                    >
+                        ${escapeHTML(tailor.name)}
+                    </option>
+
+                `
+                    ).join("");
+
+
+                const savedTailor =
+                    localStorage.getItem(
+                        "stichkartTailor"
+                    );
+
+
+                let selectedTailorId =
+                    savedTailor || "";
+
+
+                if (
+                    !tailors.some(
+                        tailor =>
+                            String(tailor.id) ===
+                            String(selectedTailorId)
+                    )
+                ) {
+
+                    selectedTailorId =
+                        tailors.length
+                            ? tailors[0].id
+                            : "";
+
+                }
+
+
+                select.value =
+                    selectedTailorId;
+
+
+                currentTailor =
+                    tailors.find(
+                        tailor =>
+                            String(tailor.id) ===
+                            String(selectedTailorId)
+                    );
+
+
+                updateHeader();
+
+
+                localStorage.setItem(
+                    "stichkartTailor",
+                    selectedTailorId
+                );
+
+
+                loadOrders();
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById(
+                    "ordersContainer"
+                ).innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Unable to load tailor accounts
+                </h2>
+
+                <p>
+                    Check that the Node.js server is running.
+                </p>
+
+            </div>
+
+        `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CHANGE TAILOR ACCOUNT
+        ===================================================== */
+
+        function changeTailorAccount() {
+
+            const id =
+                document.getElementById(
+                    "tailorSelect"
+                ).value;
+
+
+            currentTailor =
+                tailors.find(
+                    tailor =>
+                        String(tailor.id) ===
+                        String(id)
+                );
+
+
+            localStorage.setItem(
+                "stichkartTailor",
+                id
+            );
+
+
+            updateHeader();
+
+            loadOrders();
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        function updateHeader() {
+
+            if (!currentTailor) {
+                return;
+            }
+
+
+            document.getElementById(
+                "headerTailorName"
+            ).textContent =
+                currentTailor.name;
+
+
+            document.getElementById(
+                "headerTailorLocation"
+            ).textContent =
+                currentTailor.location;
+
+        }
+
+
+        /* =====================================================
+           LOAD ASSIGNED ORDERS
+        ===================================================== */
+
+        async function loadOrders() {
+
+            if (!currentTailor) {
+
+                return;
+
+            }
+
+
+            const container =
+                document.getElementById(
+                    "ordersContainer"
+                );
+
+
+            container.innerHTML = `
+
+        <div class="loading">
+            Loading orders for
+            ${escapeHTML(currentTailor.name)}...
+        </div>
+
+    `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/orders?tailorId=" +
+                        encodeURIComponent(
+                            currentTailor.id
+                        )
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Orders load nahi hue."
+                    );
+
+                }
+
+
+                allOrders =
+                    data.orders || [];
+
+
+                updateStats();
+
+
+                renderOrders();
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Orders load nahi ho rahe
+                </h2>
+
+                <p>
+                    Backend connection check karo.
+                </p>
+
+            </div>
+
+        `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        function updateStats() {
+
+            document.getElementById(
+                "totalCount"
+            ).textContent =
+                allOrders.length;
+
+
+            document.getElementById(
+                "newCount"
+            ).textContent =
+                allOrders.filter(
+                    order =>
+                        order.status ===
+                        "Reference Pending"
+                ).length;
+
+
+            document.getElementById(
+                "stitchingCount"
+            ).textContent =
+                allOrders.filter(
+                    order =>
+                        order.status ===
+                        "In Progress"
+                ).length;
+
+
+            document.getElementById(
+                "completedCount"
+            ).textContent =
+                allOrders.filter(
+                    order =>
+                        order.status ===
+                        "Completed"
+                ).length;
+
+        }
+
+
+        /* =====================================================
+           FILTER
+        ===================================================== */
+
+        function setFilter(
+            filter,
+            button
+        ) {
+
+            currentFilter =
+                filter;
+
+
+            document
+                .querySelectorAll(
+                    ".sidebar button"
+                )
+                .forEach(
+                    btn =>
+                        btn.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            document.getElementById(
+                "statusFilter"
+            ).value =
+                filter;
+
+
+            renderOrders();
+
+        }
+
+
+        /* =====================================================
+           RENDER ORDERS
+        ===================================================== */
+
+        function renderOrders() {
+
+            const container =
+                document.getElementById(
+                    "ordersContainer"
+                );
+
+
+            const search =
+                document.getElementById(
+                    "search"
+                ).value
+                    .trim()
+                    .toLowerCase();
+
+
+            const status =
+                document.getElementById(
+                    "statusFilter"
+                ).value;
+
+
+            let filtered =
+                [...allOrders];
+
+
+            if (status !== "All") {
+
+                filtered =
+                    filtered.filter(
+                        order =>
+                            order.status ===
+                            status
+                    );
+
+            }
+
+
+            if (search) {
+
+                filtered =
+                    filtered.filter(
+                        order => {
+
+                            const text = [
+
+                                order.orderNumber,
+
+                                order.customerName,
+
+                                order.phone,
+
+                                order.garment,
+
+                                order.gender,
+
+                                order.status
+
+                            ]
+                                .join(" ")
+                                .toLowerCase();
+
+
+                            return text.includes(
+                                search
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            if (!filtered.length) {
+
+                container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ✂️
+                </div>
+
+                <h2>
+                    No Assigned Orders
+                </h2>
+
+                <p>
+                    No orders match this filter for
+                    ${escapeHTML(
+                    currentTailor.name
+                )}.
+                </p>
+
+            </div>
+
+        `;
+
+                return;
+
+            }
+
+
+            filtered.sort(
+                (a, b) =>
+                    new Date(b.createdAt) -
+                    new Date(a.createdAt)
+            );
+
+
+            container.innerHTML =
+                filtered
+                    .map(
+                        order =>
+                            createOrderCard(
+                                order
+                            )
+                    )
+                    .join("");
+
+        }
+
+
+        /* =====================================================
+           ORDER CARD
+        ===================================================== */
+
+        function createOrderCard(order) {
+
+            const initials =
+                (order.customerName || "C")
+                    .split(" ")
+                    .map(
+                        word =>
+                            word[0]
+                    )
+                    .join("")
+                    .substring(0, 2)
+                    .toUpperCase();
+
+
+            const date =
+                order.createdAt
+
+                    ? new Date(
+                        order.createdAt
+                    ).toLocaleString(
+                        "en-IN",
+                        {
+                            dateStyle: "medium",
+                            timeStyle: "short"
+                        }
+                    )
+
+                    : "Date unavailable";
+
+
+            const design =
+                order.designReference || {};
+
+
+            let refs = "";
+
+
+            if (design.url) {
+
+                refs += `
+
+            <a
+                class="ref-btn"
+                href="${escapeHTML(design.url)}"
+                target="_blank"
+                rel="noopener"
+            >
+                🔗 Open Design / Reel
+            </a>
+
+        `;
+
+            }
+
+
+            if (design.fileData) {
+
+                refs += `
+
+            <button
+                class="ref-btn"
+                onclick="
+                    openFile(
+                        '${escapeHTML(order.id)}'
+                    )
+                "
+            >
+                📎 Open Attached File
+            </button>
+
+        `;
+
+            }
+
+
+            if (!refs) {
+
+                refs = `
+
+            <span
+                style="
+                    color:#666;
+                    font-size:12px;
+                "
+            >
+                No design reference provided.
+            </span>
+
+        `;
+
+            }
+
+
+            return `
+
+        <article class="order-card">
+
+
+            <!-- HEADER -->
+
+            <div class="order-header">
+
+                <div>
+
+                    <div class="order-number">
+
+                        ${escapeHTML(
+                order.orderNumber
+            )}
+
+                    </div>
+
+                    <div class="order-date">
+
+                        ${date}
+
+                    </div>
+
+                </div>
+
+
+                <div class="status">
+
+                    ${escapeHTML(
+                order.status
+            )}
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="customer">
+
+                <div class="customer-avatar">
+
+                    ${escapeHTML(
+                initials
+            )}
+
+                </div>
+
+
+                <div>
+
+                    <div class="customer-name">
+
+                        ${escapeHTML(
+                order.customerName
+            )}
+
+                    </div>
+
+                    <div class="customer-phone">
+
+                        📞
+                        ${escapeHTML(
+                order.phone
+            )}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Collection
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${escapeHTML(
+                order.gender
+            )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Garment
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${escapeHTML(
+                order.garment
+            )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Fit Reference
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${order.physicalReferenceGarment
+                    ? "✓ Physical garment"
+                    : "Not provided"
+                }
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Customer
+                    </div>
+
+                    <div class="detail-value">
+
+                        ${escapeHTML(
+                    order.customerName
+                )}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DESIGN -->
+
+            <div class="references">
+
+                <div class="references-title">
+
+                    🎨 Design Reference
+
+                </div>
+
+
+                <div class="reference-buttons">
+
+                    ${refs}
+
+                </div>
+
+            </div>
+
+
+            <!-- INSTRUCTIONS -->
+
+            <div class="instructions">
+
+                <div class="instructions-title">
+
+                    Customer Instructions
+
+                </div>
+
+
+                <div class="instructions-text">
+
+                    ${escapeHTML(
+                    order.instructions ||
+                    "No additional instructions."
+                )
+                }
+
+                </div>
+
+            </div>
+
+
+            <!-- PHYSICAL GARMENT -->
+
+            ${order.physicalReferenceGarment
+
+                    ? `
+
+                    <div class="fit-reference">
+
+                        👕
+                        Customer will provide an old
+                        garment physically as the fit /
+                        proportion reference.
+
+                    </div>
+
+                `
+
+                    : ""
+
+                }
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                ${order.status ===
+                    "Reference Pending"
+
+                    ? `
+
+                        <button
+                            class="action primary"
+                            onclick="
+                                updateStatus(
+                                    '${escapeHTML(order.id)}',
+                                    'Accepted'
+                                )
+                            "
+                        >
+                            ✓ Accept Order
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                ${order.status ===
+                    "Accepted"
+
+                    ? `
+
+                        <button
+                            class="action primary"
+                            onclick="
+                                updateStatus(
+                                    '${escapeHTML(order.id)}',
+                                    'In Progress'
+                                )
+                            "
+                        >
+                            ✂️ Start Stitching
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                ${order.status ===
+                    "In Progress"
+
+                    ? `
+
+                        <button
+                            class="action primary"
+                            onclick="
+                                updateStatus(
+                                    '${escapeHTML(order.id)}',
+                                    'Ready'
+                                )
+                            "
+                        >
+                            📦 Mark Ready
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                ${order.status ===
+                    "Ready"
+
+                    ? `
+
+                        <button
+                            class="action primary"
+                            onclick="
+                                updateStatus(
+                                    '${escapeHTML(order.id)}',
+                                    'Completed'
+                                )
+                            "
+                        >
+                            ✓ Complete Order
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                <button
+                    class="action"
+                    onclick="
+                        viewDetails(
+                            '${escapeHTML(order.id)}'
+                        )
+                    "
+                >
+                    View Full Details
+                </button>
+
+
+                ${order.status !==
+                    "Completed"
+
+                    ? `
+
+                        <button
+                            class="action danger"
+                            onclick="
+                                rejectOrder(
+                                    '${escapeHTML(order.id)}'
+                                )
+                            "
+                        >
+                            Reject
+                        </button>
+
+                    `
+
+                    : ""
+
+                }
+
+            </div>
+
+
+        </article>
+
+    `;
+
+        }
+
+
+        /* =====================================================
+           UPDATE STATUS
+        ===================================================== */
+
+        async function updateStatus(
+            orderId,
+            status
+        ) {
+
+            const order =
+                allOrders.find(
+                    item =>
+                        String(item.id) ===
+                        String(orderId)
+                );
+
+
+            if (!order) {
+
+                return;
+
+            }
+
+
+            const response =
+                await fetch(
+                    `/api/orders/${orderId}/status`,
+                    {
+
+                        method: "PATCH",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            status: status
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!data.success) {
+
+                alert(
+                    data.message ||
+                    "Status update nahi hua."
+                );
+
+                return;
+
+            }
+
+
+            await loadOrders();
+
+        }
+
+
+        /* =====================================================
+           REJECT
+        ===================================================== */
+
+        async function rejectOrder(
+            orderId
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to reject this order?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            await updateStatus(
+                orderId,
+                "Rejected"
+            );
+
+        }
+
+
+        /* =====================================================
+           VIEW DETAILS
+        ===================================================== */
+
+        function viewDetails(orderId) {
+
+            const order =
+                allOrders.find(
+                    item =>
+                        String(item.id) ===
+                        String(orderId)
+                );
+
+
+            if (!order) {
+
+                return;
+
+            }
+
+
+            const design =
+                order.designReference || {};
+
+
+            document.getElementById(
+                "detailsContent"
+            ).innerHTML = `
+
+        <div
+            style="
+                display:grid;
+                gap:13px;
+            "
+        >
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Order Number
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                order.orderNumber
+            )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Customer
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                order.customerName
+            )}
+                    <br>
+                    ${escapeHTML(
+                order.phone
+            )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Garment
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                order.garment
+            )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Design URL
+                </div>
+
+                <div class="detail-value">
+
+                    ${design.url
+                    ? escapeHTML(
+                        design.url
+                    )
+                    : "Not provided"
+                }
+
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Instructions
+                </div>
+
+                <div class="detail-value">
+
+                    ${escapeHTML(
+                    order.instructions ||
+                    "No additional instructions."
+                )
+                }
+
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Physical Fit Reference
+                </div>
+
+                <div class="detail-value">
+
+                    ${order.physicalReferenceGarment
+                    ? "Yes — customer will provide physical garment."
+                    : "No"
+                }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+            document
+                .getElementById(
+                    "detailsModal"
+                )
+                .classList.add("show");
+
+        }
+
+
+        /* =====================================================
+           CLOSE DETAILS
+        ===================================================== */
+
+        function closeDetails() {
+
+            document
+                .getElementById(
+                    "detailsModal"
+                )
+                .classList.remove("show");
+
+        }
+
+
+        /* =====================================================
+           OPEN DESIGN FILE
+        ===================================================== */
+
+        async function openFile(orderId) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/orders"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                const order =
+                    data.orders.find(
+                        item =>
+                            String(item.id) ===
+                            String(orderId)
+                    );
+
+
+                if (
+                    !order ||
+                    !order.designReference ||
+                    !order.designReference.fileData
+                ) {
+
+                    alert(
+                        "Design file available nahi hai."
+                    );
+
+                    return;
+
+                }
+
+
+                const fileData =
+                    order.designReference.fileData;
+
+
+                const newWindow =
+                    window.open();
+
+
+                if (!newWindow) {
+
+                    alert(
+                        "Popup blocked. Safari popups allow karo."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    fileData.startsWith(
+                        "data:image/"
+                    )
+                ) {
+
+                    newWindow.document.write(`
+
+                <html>
+
+                <body
+                    style="
+                        margin:0;
+                        background:#111;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        min-height:100vh;
+                    "
+                >
+
+                    <img
+                        src="${fileData}"
+                        style="
+                            max-width:95%;
+                            max-height:95vh;
+                            object-fit:contain;
+                        "
+                    >
+
+                </body>
+
+                </html>
+
+            `);
+
+                }
+                else {
+
+                    newWindow.document.write(`
+
+                <html>
+
+                <body
+                    style="
+                        background:#111;
+                        color:#fff;
+                        font-family:Arial;
+                        text-align:center;
+                        padding:50px;
+                    "
+                >
+
+                    <h2>
+                        Design File
+                    </h2>
+
+                    <br>
+
+                    <a
+                        href="${fileData}"
+                        download="${escapeHTML(
+                        order.designReference.fileName ||
+                        "stichkart-design"
+                    )
+                        }"
+                        style="
+                            display:inline-block;
+                            padding:14px 22px;
+                            background:#d4af37;
+                            color:#111;
+                            text-decoration:none;
+                            border-radius:10px;
+                            font-weight:bold;
+                        "
+                    >
+                        Open / Download File
+                    </a>
+
+                </body>
+
+                </html>
+
+            `);
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Design file open nahi ho payi."
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        function tailorLogout() {
+
+            localStorage.removeItem(
+                "stichkartTailor"
+            );
+
+            window.location.href =
+                "/tailor.html";
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(value) {
+
+            if (
+                value === undefined ||
+                value === null
+            ) {
+
+                return "";
+
+            }
+
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           START
+        ===================================================== */
+
+        loadTailors();
+
+    </script>
+
+</body>
+
+</html>

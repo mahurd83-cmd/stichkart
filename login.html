@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StichKart | Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, .12), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, .08), transparent 30%),
+                #080808;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(22, 22, 22, .95);
+            border: 1px solid rgba(212, 175, 55, .3);
+            border-radius: 28px;
+            padding: 42px 35px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .6);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #d4af37;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(212, 175, 55, .5),
+                    transparent);
+            margin: 30px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, .08);
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #d4af37, #f2d675);
+            color: #111;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, .2);
+        }
+
+        .message {
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 12px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .error {
+            display: block;
+            background: rgba(255, 70, 70, .1);
+            border: 1px solid rgba(255, 70, 70, .3);
+            color: #ff9b9b;
+        }
+
+        .success {
+            display: block;
+            background: rgba(80, 200, 120, .1);
+            border: 1px solid rgba(80, 200, 120, .3);
+            color: #9cffbd;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #d4af37;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="logo">STICHKART</div>
+
+        <div class="subtitle">
+            Your Design. Your Fit. Your Tailor.
+            <br>
+            Login to view your orders.
+        </div>
+
+        <div class="divider"></div>
+
+        <form id="loginForm">
+
+            <label for="phone">Mobile Number</label>
+
+            <input type="tel" id="phone" placeholder="Enter 10 digit mobile number" maxlength="10" required>
+
+            <div id="nameBox" style="display:none;">
+
+                <label for="name">Your Name</label>
+
+                <input type="text" id="name" placeholder="Enter your name">
+
+            </div>
+
+            <button type="submit">
+                Continue
+            </button>
+
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <a href="/" class="back">
+            ← Back to StichKart
+        </a>
+
+        <div class="note">
+            Prototype login • Real OTP authentication will be added later
+        </div>
+
+    </div>
+
+    <script>
+
+        const form = document.getElementById("loginForm");
+        const phoneInput = document.getElementById("phone");
+        const nameBox = document.getElementById("nameBox");
+        const nameInput = document.getElementById("name");
+        const message = document.getElementById("message");
+
+        let existingUser = null;
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className = "message " + type;
+        }
+
+        phoneInput.addEventListener("input", async () => {
+
+            const phone = phoneInput.value.trim();
+
+            message.style.display = "none";
+
+            if (phone.length !== 10) {
+                nameBox.style.display = "none";
+                existingUser = null;
+                return;
+            }
+
+            try {
+
+                const response = await fetch("/api/users");
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    return;
+                }
+
+                existingUser = data.users.find(
+                    user => String(user.phone) === phone
+                );
+
+                if (existingUser) {
+
+                    nameBox.style.display = "none";
+
+                } else {
+
+                    nameBox.style.display = "block";
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        });
+
+        form.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const phone = phoneInput.value.trim();
+            const name = nameInput.value.trim();
+
+            if (!/^\d{10}$/.test(phone)) {
+
+                showMessage(
+                    "Please enter a valid 10 digit mobile number.",
+                    "error"
+                );
+
+                return;
+            }
+
+            try {
+
+                let user = existingUser;
+
+                /*
+                 * Existing customer
+                 */
+                if (!user) {
+
+                    if (!name) {
+
+                        showMessage(
+                            "New customer ke liye apna name enter karo.",
+                            "error"
+                        );
+
+                        nameInput.focus();
+
+                        return;
+                    }
+
+                    const createResponse = await fetch("/api/users", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            phone: phone
+                        })
+
+                    });
+
+                    const createData = await createResponse.json();
+
+                    if (!createData.success) {
+
+                        showMessage(
+                            createData.message || "Account create nahi ho paya.",
+                            "error"
+                        );
+
+                        return;
+                    }
+
+                    user = createData.user;
+                }
+
+                /*
+                 * Save logged-in customer
+                 */
+                localStorage.setItem(
+                    "stichkartUser",
+                    JSON.stringify(user)
+                );
+
+                showMessage(
+                    "Login successful. Opening your orders...",
+                    "success"
+                );
+
+                setTimeout(() => {
+
+                    window.location.href = "/orders.html";
+
+                }, 700);
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "Server se connection nahi ho raha. Check karo ki node server running hai.",
+                    "error"
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
